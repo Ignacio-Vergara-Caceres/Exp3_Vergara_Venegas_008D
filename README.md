@@ -9,15 +9,18 @@ Pillow 10.3.0
 setuptools 65.5.0
 Instalación y Configuración
 1. Clonar el Repositorio
+```
 git clone https://github.com/Ignacio-Vergara-Caceres/Exp3_Vergara_Venegas_008D.git
 cd Exp3_Vergara_Venegas_008D
+```
 2. Instalar Dependencias
 Instala las dependencias necesarias:
 Django 5.0.6
 Pillow 10.3.0
 setuptools 65.5.0
-
+```
 pip install Django==5.0.6 Pillow==10.3.0 setuptools==65.5.0
+```
 3. Iniciar el Servidor de Desarrollo
 python manage.py runserver
 Visita http://localhost:8000 en tu navegador para ver la página web.
