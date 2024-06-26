@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block contenido %}
+    <div class="container">
+        <h2>Tienda</h2>
+        <div class="row">
+            <div class="row" style="padding: 5px 0;">
+                <div class="col-12">
+                    <div class="row">
+                        {% for pro in productos %}
+                        <div class="col-6">
+                            <div class="card text-center">
+                                {% if pro.imagen %}
+                                    <img src="{{ pro.imagen.url }}" class="card-img-top mx-auto">
+                                {% else %}
+                                    <img src="{% static 'img/sinfoto.webp' %}" class="card-img-top mx-auto">
+                                {% endif %}
+                                <div class="card-body">
+                                    <h5 class="card-title" style="font-weight: bold;">{{ pro.nombre }}</h5>
+                                    <p class="card-text">
+                                        Descripcion: {{ pro.descripcion }} <br>
+                                        Categoria: {{ pro.categoria }} <br>
+                                        Codigo: {{ pro.idProducto }} <br>
+                                        Precio: ${{ pro.precio }} <br>
+                                    </p>
+                                    <a href="{% url 'agregar' pro.idProducto %}" class="btn btn-success">Agregar al carrito</a>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-4">
+            {% include "carrito.html" %}
+        </div>
+    </div>
+{% endblock contenido %}
+
+{% block script %}
+{% endblock script %}

@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block head_estilos %}<link rel="stylesheet" href="{% static 'css/registro.css' %}">{% endblock head_estilos %}
+         
+{% block contenido %}
+    <main class="container">
+        <h2 style="text-align: center">Registrar Usuario</h2>
+        <div style="background-color: #f2f2f2;padding: 10px;border: #304634 solid;">
+            <form action="#" method="POST">
+                {% csrf_token %}
+                <div class="formulario-registro">
+                    <div>
+                        {{ form.non_field_errors }}
+                    </div>
+                    <div>
+                        <label for="{{ form.username.id_for_label }}">Nombre de Usuario:</label>
+                        {{ form.username }}
+                        <div class="error">{{ form.username.errors }}</div>
+                    </div>
+                    <div>
+                        <label for="{{ form.first_name.id_for_label }}">Nombre:</label>
+                        {{ form.first_name }}
+                        <div class="error">{{ form.first_name.errors }}</div>
+                    </div>
+                    <div>
+                        <label for="{{ form.last_name.id_for_label }}">Apellido:</label>
+                        {{ form.last_name }}
+                        <div class="error">{{ form.last_name.errors }}</div>
+                    </div>
+                    <div>
+                        <label for="{{ form.email.id_for_label }}">Correo:</label>
+                        {{ form.email }}
+                        <div class="error">{{ form.email.errors }}</div>
+                    </div>
+                    <div>
+                        <label for="{{ form.password1.id_for_label }}">Contraseña:</label>
+                        {{ form.password1 }}
+                        <div class="error">{{ form.password1.errors }}</div>
+                    </div>
+                    <div>
+                        <label for="{{ form.password2.id_for_label }}">Confirmar Contraseña:</label>
+                        {{ form.password2 }}
+                        <div class="error">{{ form.password2.errors }}</div>
+                    </div>
+                </div>
+                <br>
+                <a href="{% url 'login' %}" class="btn btn-link;btn btn-secondary">Iniciar sesión</a>
+                <a href="{% url 'inicio' %}" class="btn btn-link;btn btn-secondary">Inicio</a>
+                <input type="submit" value="Registrarse" class="btn btn-outline-primary" style="float:right">
+
+
+
+            </form>
+        </div>
+        <br>
+    </main>
+{% endblock contenido %}
+{% block script %}
+{% endblock script %}   

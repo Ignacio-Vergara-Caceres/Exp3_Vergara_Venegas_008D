@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block head_estilos %}<link rel="stylesheet" href="{% static 'css/acercaDe.css' %}">{% endblock head_estilos %}
+         
+{% block contenido %}
+    <main class="container">
+        <br>
+        <h1 class="acercaDe-h1">Nuestra misión es facilitar a los vecinos de la comunidad...</h1>
+        <h2 class="acercaDe-h2">1. Proporcionar a los usuarios una herramienta para elaborar listas de compras que les permita ordenar presupuestos de manera efectiva.</h2>
+        <h2 class="acercaDe-h2">2. Promover la solidaridad y el apoyo a la fundación sin fines de lucro, incentivando las donaciones a través de la plataforma.</h2>
+        <div class="video-acercaDe">
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/7IE1pIFr4_Y?si=lmmIs4OQ8XEyvois" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        </div>
+        
+        <br>
+        
+    </main>
+{% endblock contenido %}
+{% block script %}
+{% endblock script %} 

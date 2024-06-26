@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block head_estilos %}
+    <style>
+        .bd-placeholder-img {
+            font-size: 1.125rem;
+            text-anchor: middle;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        @media (min-width: 768px) {
+            .bd-placeholder-img-lg {
+                font-size: 3.5rem;
+            }
+        }
+    </style>
+
+{% endblock head_estilos %}
+
+{% block contenido %}
+    <br>
+    <main class="container" style="background-color: #ffffff;border: 2px solid #304634;padding: 10px;">
+        <h2>Eliminando Producto</h2>
+        <br>
+        <form action="#" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+
+            <div class="form-group">
+                <label for="idProducto">Id Producto: </label>
+                {{ producto.idProducto }}
+            </div>
+
+            <div class="form-group">
+                <label for="stock">Stock Producto: </label>
+                {{ producto.stock }}
+            </div>
+
+
+            <div class="form-group">
+                <label for="nombre">Nombre: </label>
+                {{ producto.nombre }}
+            </div>
+
+            <div class="form-group">
+                <label for="descripcion">Descripcion: </label>
+                {{ producto.descripcion }}
+            </div>
+
+            <div class="form-group">
+                <label for="precio">Precio: </label>
+                {{ producto.precio }}
+            </div>
+
+            <div class="form-group">
+                <label for="categoria">Categoria: </label>
+                {{ producto.categoria }}
+            </div>
+
+            <div class="form-group">
+                <label for="imagen">Imagen: </label>
+                {{ producto.imagen }}
+            </div>
+
+            {% if producto.imagen %}
+                <img src="{{ producto.imagen.url }}" style="width: 80px; height: 80px;">
+                {% else %}
+                <h5 style="color:red">Producto sin foto</h5>
+            {% endif %}
+
+            <br> <br>
+            <input type="submit" value="Confirma Eliminación?" name="elimina" class="btn btn-danger" style="color: black;">
+            
+
+        </form>
+    </main>
+    <br>
+{% endblock contenido %}
+{% block script %}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.js"></script>  
+{% endblock script %}
+</html>

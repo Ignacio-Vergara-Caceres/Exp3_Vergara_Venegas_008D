@@ -1,0 +1,120 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block head_estilos %}
+    <style>
+        .bd-placeholder-img {
+            font-size: 1.125rem;
+            text-anchor: middle;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+        
+        .error-control{
+            border: 1px solid red;
+        }
+
+        label.error{
+            color: red;
+            width: 200px;
+            font-size: 0.8em;
+            margin-top:-5px;
+            margin-bottom:10px;
+        }
+
+        @media (min-width: 768px) {
+            .bd-placeholder-img-lg {
+                font-size: 3.5rem;
+            }
+        }
+    </style>
+{% endblock head_estilos %}
+
+{% block contenido %}
+    
+    <script>
+        $(function(){ 
+            $("#formulario").validate({ 
+                rules:{
+                    idProducto: "required",
+                    nombre: "required",
+                    descripcion: "required",
+                    categoria: "required",
+                    imagen: "required"
+                },
+                messages:{
+                    idProducto:{
+                        required: 'Ingrese Id Producto',
+                    },
+                    nombre:{
+                        required: 'Ingrese nombre',
+                    },
+                    descripcion:{
+                        required: 'Ingrese descripcion',
+                    },
+                    categoria:{
+                        required: 'Seleccione categoria',
+                    },
+                    imagen: {
+                        required: 'Seleccione imagen',
+                    }
+                }
+
+
+
+            })
+        })
+
+    </script>
+        
+        <main class="container">
+            <h2>Creando Productos</h2>
+            <br>
+
+            <form action="#" method="POST" enctype="multipart/form-data" id="formulario">
+                {% csrf_token %}
+
+                <div class="form-group">
+                    {{ productoform.idProducto.label }}
+                    {{ productoform.idProducto }}
+                </div>
+
+                <div class="form-group">
+                    {{ productoform.nombre.label }}
+                    {{ productoform.nombre }}
+                </div>
+
+                <div class="form-group">
+                    {{ productoform.descripcion.label }}
+                    {{ productoform.descripcion }}
+                </div>
+
+                <div class="form-group">
+                    {{ productoform.precio.label }}
+                    {{ productoform.precio }}
+                </div>
+
+                <div class="form-group">
+                    {{ productoform.categoria.label }}
+                    {{ productoform.categoria }}
+                </div>
+
+                <div class="form-group">
+                    {{ productoform.imagen.label }}
+                    {{ productoform.imagen }}
+                </div>
+            
+                <input type="submit" value="Almacenar" class="btn btn-success">
+            </form>
+
+        </main>
+    {% endblock contenido %}
+    {% block script %}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.js"></script>  
+    {% endblock script %}
+
+</html>

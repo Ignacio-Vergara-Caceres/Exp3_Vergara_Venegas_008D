@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block head_estilos %}
+    <link rel="stylesheet" href="{% static 'css/registro.css' %}">
+{% endblock head_estilos %}
+         
+{% block contenido %}
+<br>
+<main class="container" style="background-color: #f2f2f2;padding: 10px;border: #304634 solid;">
+
+    <H2>Perfil de {{ user.username }}</H2>
+    <br>
+
+    <form method="POST" enctype="multipart/form-data">  
+        {% csrf_token %}
+        <div class="formulario-perfil">
+            <div>
+                {{ form.non_field_errors }}
+            </div>
+            <div>
+                <label for="{{ form.first_name.id_for_label }}">Nombre:</label>
+                {{ form.first_name }}
+                <div class="error">{{ form.first_name.errors }}</div>
+            </div>
+            <div>
+                <label for="{{ form.last_name.id_for_label }}">Apellido:</label>
+                {{ form.last_name }}
+                <div class="error">{{ form.last_name.errors }}</div>
+            </div>
+            <div>
+                <label for="{{ form.email.id_for_label }}">Correo:</label>
+                {{ form.email }}
+                <div class="error">{{ form.email.errors }}</div>
+            </div>
+            <div>
+                <h5 style="padding: 5px;">Para confirmar cambios, escriba o cambie la contraseña</h5>
+                <label for="{{ form.password1.id_for_label }}">Contraseña:</label>
+                {{ form.password1 }}
+                <div class="error">{{ form.password1.errors }}</div>
+            </div>
+            <div>
+                <label for="{{ form.password2.id_for_label }}">Confirmar Contraseña:</label>
+                {{ form.password2 }}
+                <div class="error">{{ form.password2.errors }}</div>
+            </div>
+        </div>
+
+        <input type="submit" value="Modificar" class="btn btn-warning">
+        <a href="{% url 'inicio' %}" class="btn btn-info">Ir a inicio</a>
+
+
+    </form>
+</main>
+<br>
+{% endblock contenido %}
+{% block script %}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.js"></script>  
+{% endblock script %}

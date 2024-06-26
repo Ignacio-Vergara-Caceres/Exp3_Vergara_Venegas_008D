@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block head_estilos %}
+    
+    <style>
+        .bd-placeholder-img {
+            font-size: 1.125rem;
+            text-anchor: middle;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        @media (min-width: 768px) {
+            .bd-placeholder-img-lg {
+                font-size: 3.5rem;
+            }
+        }
+    </style>
+
+{% endblock head_estilos %}
+
+{% block contenido %}
+    
+    <div class="container">
+        <br>
+        <h2 style="text-align: center;">Detalle Producto</h2>
+
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card">
+                    <img src="{{ producto.imagen.url }}" class="card-img-top">
+                    <div class="card-body">
+                        <h5 class="card-title">Id Producto: {{ producto.idProducto }}</h5>
+                        <p class="card-text"> Nombre: {{ producto.nombre}}</p>
+                        <p class="card-text"> Stock: {{ producto.stock}}</p>
+                        <p class="card-text"> Descripcion: {{ producto.descripcion}}</p>
+                        <p class="card-text"> Precio: {{ producto.precio}}</p>
+                        <p class="card-text"> Categoria: {{ producto.categoria}}</p>
+                        <a href="{% url 'productos' %}" class="btn btn-info" style="color: black;"> Ir a Productos </a>
+                        <a href="{% url 'modificar' producto.idProducto %}" class="btn btn-warning" style="color: black;"> Modificar </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock contenido %}
+{% block script %}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.js"></script>  
+{% endblock script %}
+</html>

@@ -1,0 +1,53 @@
+/* Estilos globales*/
+body {
+    font-family: Arial, sans-serif;
+    background-image: url("../img/patron_fondo.png");
+}
+
+nav {
+    text-align: center;
+    background-color: #304634;
+    padding: 10px;
+}
+
+footer{
+    border: 4px solid #304634;
+}
+
+.footer-img {
+    width: 100px;
+    margin-right: 10px;
+}
+
+
+
+.acercaDe-h1{
+    padding:20px;
+    font-family: Arial, Helvetica, sans-serif;
+    color:#fff;
+    background-color: #304634;
+    text-align: justify;
+}
+.acercaDe-h2{
+    padding: 30px;
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #304634;
+    color:#fff;
+    text-align: justify;
+}
+
+.video-acercaDe{
+    position: relative;
+    width: 100%;
+    padding-bottom: 56.25%;
+    overflow: hidden;
+    margin: 0 auto; /* Centra horizontalmente */
+}
+  
+.video-acercaDe iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}

@@ -1,0 +1,89 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block head_estilos %}
+    
+    <style>
+        .bd-placeholder-img {
+            font-size: 1.125rem;
+            text-anchor: middle;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        @media (min-width: 768px) {
+            .bd-placeholder-img-lg {
+                font-size: 3.5rem;
+            }
+        }
+    </style>
+    
+{% endblock head_estilos %}
+
+{% block contenido %}
+       
+    <main class="container">
+
+        <H2>Modificando Producto</H2>
+        <br>
+
+        <form action="#" method="POST" enctype="multipart/form-data" id="formulario">  
+            {% csrf_token %}
+
+            <div class="form-group">
+                {{ forModificar.idProducto.label }}
+                {{ forModificar.idProducto }}
+            </div>
+
+            <div class="form-group">
+                {{ forModificar.stock.label }}
+                {{ forModificar.stock }}
+            </div>
+
+            <div class="form-group">
+                {{ forModificar.nombre.label }}
+                {{ forModificar.nombre }}
+            </div>
+
+            <div class="form-group">
+                {{ forModificar.descripcion.label }}
+                {{ forModificar.descripcion }}
+            </div>
+
+            <div class="form-group">
+                {{ forModificar.precio.label }}
+                {{ forModificar.precio }}
+            </div>
+
+            <div class="form-group">
+                {{ forModificar.categoria.label }}
+                {{ forModificar.categoria }}
+            </div>
+
+            {% if producto.imagen %}
+                <img src="{{ producto.imagen.url }}" style="width: 80px; height: 80px;">
+            {% else %}
+                <h5 style="color:red">Producto sin foto</h5>
+            {% endif %}
+
+            <div class="form-group">
+                {{ forModificar.imagen.label }}
+                {{ forModificar.imagen }}
+            </div>
+
+            <input type="submit" value="Modificar" class="btn btn-warning" style="color: black;">
+            <a href="{% url 'productos' %}" class="btn btn-info" style="color: black;">Ir a Productos</a>
+
+
+        </form>
+    </main>
+
+{% endblock contenido %}
+{% block script %}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.js"></script>  
+{% endblock script %}
+</html>

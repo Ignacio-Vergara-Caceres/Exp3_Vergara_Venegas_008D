@@ -1,0 +1,63 @@
+/* Estilos globales*/
+body {
+    font-family: Arial, sans-serif;
+    background-image: url("../img/patron_fondo.png");
+}
+
+nav {
+    text-align: center;
+    background-color: #304634;
+    padding: 10px;
+}
+
+footer{
+    border: 4px solid #304634;
+}
+
+.footer-img {
+    width: 100px;
+    margin-right: 10px;
+}
+
+/* ############################################################################################################################################# */
+/* Estilos página inicio */
+
+/* Estilos para el carrusel */
+.carousel-control-prev,
+.carousel-control-next {
+    background-color: #304634;
+    width: 40px; /* Ancho del botón */
+    height: auto; /* Alto del botón */
+    font-size: 24px; /* Tamaño de la fuente del icono */
+    color: #fff; /* Color del icono */
+    
+}
+
+.carousel-control-prev:hover,
+.carousel-control-next:hover {
+    background-color: #304634; /* Cambia el color de fondo al pasar el mouse */
+}
+
+/* Estilos a link */
+a:link {
+    color: white;
+    padding: 10px;
+  }
+
+/* Estilo titulo inicio*/
+.inicio-titulo {
+    margin: auto;
+    padding: 10px;
+    background-color: #304634;
+    color: #fff;
+    text-align: center;
+}
+
+/* Estilo div parrafo inicio*/
+.inicio-div-parrafo {
+    margin: auto;
+    padding: 10px;
+    background-color: #304634;
+    color: #fff;
+    text-align: justify;
+}

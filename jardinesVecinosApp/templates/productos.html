@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block head_estilos %}<link rel="stylesheet" href="{% static 'css/productos.css' %}">{% endblock head_estilos %}
+
+{% block contenido %}
+
+    <style>
+      .bd-placeholder-img {
+          font-size: 1.125rem;
+          text-anchor: middle;
+          -webkit-user-select: none;
+          -moz-user-select: none;
+          -ms-user-select: none;
+          user-select: none;
+      }
+
+      @media (min-width: 768px) {
+          .bd-placeholder-img-lg {
+              font-size: 3.5rem;
+          }
+      }
+    </style>
+
+<main class="container">
+   <h2>Productos</h2>
+   <div class="table-responsive">
+        <table class="table" >
+            <thead>
+                <tr>
+                    <th>IDproducto</th>
+                    <th>Stock</th>
+                    <th>Nombre</th>
+                    <th>Descripcion</th>
+                    <th>Precio</th>
+                    <th>Categoria</th>
+                    <th>Imagen</th>
+                    <th>Actualizar</th>
+                    <th>Eliminar</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for pro in productos %}
+                    <tr>
+                        <td><a href="{% url 'detalle' pro.idProducto %}" class="btn btn-info"> {{pro.idProducto}}</a></td>
+                        <td>{{pro.stock}}</td>
+                        <td>{{pro.nombre}}</td>
+                        <td>{{pro.descripcion}}</td>
+                        <td>{{pro.precio}}</td>
+                        <td>{{pro.categoria}}</td>
+                        <td>
+                            <img src="{{ pro.imagen.url }}" style="height: 60px; width: 60px;">
+                        </td>
+                        <td><a href="{% url 'modificar' pro.idProducto %}" class="btn btn-success">Modificar</a></td>
+                        <td><a href="{% url 'eliminar' pro.idProducto  %}" class="btn btn-danger">Eliminar</a></td>
+
+                    </tr>
+                {%endfor%}
+            </tbody>
+        </table>
+    </div>
+  <a href="{% url 'crear' %}" class="btn btn-primary">Crear Producto</a>
+  <br>
+  <br>
+</main>
+<br>
+<br>
+{% endblock contenido %}
+{% block script %}
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.js"></script>  
+{% endblock script %}

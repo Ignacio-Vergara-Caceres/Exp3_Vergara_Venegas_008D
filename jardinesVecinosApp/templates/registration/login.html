@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block head_estilos %}
+    <link rel="stylesheet" href="{% static 'css/login.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+{% endblock head_estilos %}
+         
+{% block contenido %}
+<script>
+    var staticUrl = "{% static '' %}"; //Variable global para generar el principio de la ruta de las imagenes captcha en cambiarCaptcha()
+    var inicioUrl = "{% url 'inicio' %}"; //Variable global para generar la ruta del html inicio en validarEntrada()
+</script>
+
+    <main class="container">
+
+        <div class="row">
+            <div class="col-12 col-md-6 offset-md-3">
+                <div class="card">
+                    <div class="card-body">
+                        <h2>Iniciar sesión</h2>
+                        <hr>
+                        <form id="loginForm" action="#" method="POST">
+                            {% csrf_token %}
+                                
+                                <div class="form-group">
+                                    <label for="username">Username: </label><br>
+                                    {{form.username}}
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="password">Contraseña: </label><br>
+                                    {{form.password}}
+                                    <button class="btn btn-secondary" type="button" onclick="develarContraseña()">Mostrar</button>
+                                </div>
+
+                                <!-- Captcha -->
+                                <div class="form-group">
+                                    <label for="captcha">Captcha:</label>
+                                    <input type="text" class="form-control" id="captcha" name="captcha" required style="margin-bottom: 5px;width: auto;">
+                                    <img id="imagencaptcha" src="{% static 'imagenesCaptcha/captcha1.png' %}" class="captcha">
+                                    <button type="button" class="btn btn-secondary" onclick="cambiarCaptcha()">Refrescar</button>
+                                </div>
+                                <br>
+                                <button class="btn btn-success" id="botonIngresar" onclick="validarEntrada()">Ingresar</button>  <!-- Esto valida el captcha -->
+                                <button class="btn btn-warning" type="reset">Limpiar formulario</button>
+                                <br>
+                                <br>
+                                <a href="{% url 'registro' %}" class="btn btn-link;btn btn-secondary">Registrarse</a>
+                                <a href="{% url 'inicio' %}" class="btn btn-link;btn btn-secondary">Inicio</a>
+                        </form>
+    
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    </main>
+{% endblock contenido %}
+{% block script %}    
+    <!-- Carga de archivos JavaScript -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.js"></script>  
+    <script src="{% static 'js/login.js' %}"></script>
+{% endblock script %}

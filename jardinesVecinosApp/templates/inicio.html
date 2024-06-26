@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block head_estilos %}<link rel="stylesheet" href="{% static 'css/inicio.css' %}">{% endblock head_estilos %}
+         
+{% block contenido %}
+
+    <main class="container">
+
+        <!-- Contenido de la página -->
+        <br>
+        <h1 class="inicio-titulo">Bienvenido a Jardines Vecinos</h1>
+
+        <!-- Carrrusel -->
+        <div id="demo" class="carousel slide carrusel-tamano-img" data-bs-ride="carousel">
+            <!-- Indicadores o Puntos -->
+            <div class="carousel-indicators">
+                <button type="button" data-bs-target="#demo" data-bs-slide-to="0" class="active"></button>
+                <button type="button" data-bs-target="#demo" data-bs-slide-to="1"></button>
+                <button type="button" data-bs-target="#demo" data-bs-slide-to="2"></button>
+            </div>
+
+            <!-- Imágenes del carrusel -->
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img src="{% static 'img/carrusel1.png' %}" class="d-block w-100">
+                </div>
+                <div class="carousel-item">
+                    <img src="{% static 'img/carrusel2.png' %}" class="d-block w-100">
+                </div>
+                <div class="carousel-item">
+                    <img src="{% static 'img/carrusel3.png' %}" class="d-block w-100">
+                </div>
+            </div>
+
+            <!-- Flechas del carrusel (izquierda y derecha) -->
+            <button class="carousel-control-prev" type="button" data-bs-target="#demo" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon"></span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#demo" data-bs-slide="next">
+                <span class="carousel-control-next-icon"></span>
+            </button>
+        </div>
+
+        <div class="inicio-div-parrafo">
+            <p>
+                En nuestra comunidad, un grupo de vecinos se unió con un propósito: ayudar a una fundación sin fines de lucro a través de la venta de productos para jardinería. Desde maceteros hasta tierra de hojas, flores y arbustos, nuestra iniciativa comenzó modestamente a través de las redes sociales. Sin embargo, lo que comenzó como una pequeña colaboración ha crecido más allá de nuestras expectativas. La demanda de nuestros productos ha crecido exponencialmente, y es por eso que nos complace presentarles nuestra página web.
+            </p>
+            <p>
+                Aquí, encontrarán una amplia variedad de productos para embellecer sus espacios verdes, todo mientras contribuyen a una causa noble. Desde los clásicos maceteros hasta las más coloridas flores, estamos aquí para ayudarles a encontrar todo lo que necesitan para sus proyectos de jardinería. Únanse a nosotros en esta emocionante aventura y ayudemos juntos a hacer del mundo un lugar más verde y hermoso, ¡un jardín a la vez!
+            </p>
+        </div>
+
+        <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 80vh;">
+            <img src="{% static 'img/sin_fines_lucro.png' %}">
+            <br>
+            <img src="{% static 'img/logo_ong.png' %}">
+        </div>
+    </main>
+    
+    
+{% endblock contenido %}
+{% block script %}
+{% endblock script %}    

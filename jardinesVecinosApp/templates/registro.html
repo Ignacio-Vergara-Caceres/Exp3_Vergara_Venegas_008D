@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block head_estilos %}<link rel="stylesheet" href="{% static 'css/registro.css' %}">{% endblock head_estilos %}
+         
+{% block contenido %}
+<script>
+        var inicioUrl = "{% url 'inicio' %}"; //Variable global para generar la ruta del html inicio en varias funciones donde window.location.href va a inicio
+</script>
+    <main class="container">
+    <div class="container registro-container">
+      <hr>
+      <h2 class="registro-h2">Registro de usuario</h2>
+      <hr>
+      <form id="datosRegistro" class="registro-form">
+          <label for="nombre">Nombre:  </label> <br>
+          <input type="text" id="nombre" name="nombre" placeholder="Escriba su nombre..." class="form-control" minlength="3" required> <br>
+          
+          <label for="correo">Correo electronico:  </label> <br>
+          <input type="email" id="correo" name="correo" placeholder="Escriba su correo..." class="form-control" required>  <br>
+
+          <label for="telefono">Teléfono:  </label> <br>
+          <input type="number" id="telefono" name="telefono" placeholder="Escriba su número telefónico..." class="form-control" minlength="9" required> <br>
+          <button class="botonCon" type="button" onclick="Develarcontraseña()">Mostrar</button>
+          
+          <label for="contra">Escriba su contraseña: </label> <br>
+          <input type="password" id="contra" name="contra" minlength="8" required placeholder="Escriba su contraseña..." class="form-control"> <br>
+          <button class="botonCon" type="button" onclick="Develarcontraseña2()">Mostrar</button>
+    
+          <label for="confirm">Confirme su contraseña: </label> <br>
+          <input type="password" id="confirm" name="confirm" minlength="8" required placeholder="Confirme su contraseña..." class="form-control"> <br>
+          
+          <button class="btn btn-primary" id="botonRegistrar">Registrar</button>
+          <button id= Cancelar class="btn btn-primary">Cancelar</button>         
+      </form>    
+    </div>
+</main>
+{% endblock contenido %}
+{% block script %}
+    <!-- Carga de archivos JavaScript -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.js"></script>  
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="{% static 'js/registro.js' %}"></script>
+{% endblock script %}   

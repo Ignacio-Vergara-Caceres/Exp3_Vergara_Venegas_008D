@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block head_estilos %}<link rel="stylesheet" href="{% static 'css/feriados.css' %}">{% endblock head_estilos %}
+         
+{% block contenido %}
+    <main class="container">
+        <div class="container">
+            <h2>Días que no trabajamos</h2>
+            <hr>
+            <div class="row">
+                <div class="col-md-6">
+                    <input type="button" value="Mostrar Feriados" onclick="mostrarFeriados()" class="btn btn-success">
+                </div>
+            </div>
+            
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Fecha</th>
+                        <th>Titulo</th>
+                        <th>Tipo</th>
+                        <th>irrenunciable</th>
+                        <th>Extra</th>
+                    </tr>
+                </thead>
+                <tbody id="dias">
+                    <!-- Aquí se llenarán dinámicamente los feriados -->
+                </tbody>
+            </table>
+        </div>
+    </main>
+{% endblock contenido %}
+{% block script %}
+  <script src="{% static 'js/apiPub.js' %}"></script>
+{% endblock script %}

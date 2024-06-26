@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block head_estilos %}<link rel="stylesheet" href="{% static 'css/filtrar.css' %}">{% endblock head_estilos %}
+
+{% block contenido %}
+    <body>
+      <main class="container">
+          
+      <br>
+      
+      <div class="container filtrar-container">
+        <hr>
+        <h2 class="filtrar-h2">Búsqueda avanzada de productos</h2>
+        <hr>
+        <div class="row">
+            <div class="col-md-4">
+                <input type="button" value="Mostrar productos" onclick="mostrarProductos()" class="btn btn-outline-primary">
+            </div>
+
+            <div class="col-md-4">
+                <select name="tipo" id="tipo" class="form-select" onchange="buscarTipo()">
+                    <option value="">Seleccione tipo de producto</option>
+                    <option value="planta">Planta</option>
+                    <option value="herramienta">Herramienta de Jardinería</option>
+                    <option value="insumo">Insumos (Consumibles)</option>
+                </select>
+            </div>
+        </div>
+        
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Id Producto</th>
+                    <th>Nombre Producto</th>
+                    <th>Tipo Producto</th>
+                    <th>Precio Producto</th>
+                </tr>
+            </thead>
+            <tbody id="productos">
+                <!-- Aquí se llenarán dinámicamente los productos -->
+            </tbody>
+        </table>
+      </div>
+      
+      <br>
+      </main>
+    </body>  
+{% endblock contenido %}
+{% block script %}
+    <script src="{% static 'js/filtrar.js' %}"></script>
+{% endblock script %}
+
+
