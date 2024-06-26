@@ -1,0 +1,18 @@
+@echo off
+
+rem Clonar el repositorio
+git clone https://github.com/Ignacio-Vergara-Caceres/Exp3_Vergara_Venegas_008D.git
+cd Exp3_Vergara_Venegas_008D
+
+rem Instalar Django, Pillow y setuptools
+pip install Django==5.0.6 Pillow==10.3.0 setuptools==65.5.0
+
+rem Aplicar migraciones
+python manage.py migrate
+
+rem Crear un superusuario
+python manage.py createsuperuser --username admin --email admin@example.com --noinput
+python manage.py shell -c "from django.contrib.auth.models import User; User.objects.filter(username='admin').update(password='pbkdf2_sha256$150000$zYR6FeFD2oVw$8AV+7V+e6T18vxTIRw2tlclUcSfz6FVh1msN+NeD+pY=')"
+
+rem Iniciar el servidor de desarrollo
+python manage.py runserver
