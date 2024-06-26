@@ -5,6 +5,15 @@
 {% block contenido %}
     <div class="container">
         <h2>Tienda</h2>
+        <div>
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="alert alert-danger">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endif %}
+        </div>
         <div class="row">
             <div class="row" style="padding: 5px 0;">
                 <div class="col-12">
@@ -17,16 +26,30 @@
                                 {% else %}
                                     <img src="{% static 'img/sinfoto.webp' %}" class="card-img-top mx-auto">
                                 {% endif %}
-                                <div class="card-body">
-                                    <h5 class="card-title" style="font-weight: bold;">{{ pro.nombre }}</h5>
-                                    <p class="card-text">
-                                        Descripcion: {{ pro.descripcion }} <br>
-                                        Categoria: {{ pro.categoria }} <br>
-                                        Codigo: {{ pro.idProducto }} <br>
-                                        Precio: ${{ pro.precio }} <br>
-                                    </p>
-                                    <a href="{% url 'agregar' pro.idProducto %}" class="btn btn-success">Agregar al carrito</a>
-                                </div>
+                                {% if pro.stock > 0 %}
+                                    <div class="card-body">
+                                        <h5 class="card-title" style="font-weight: bold;">{{ pro.nombre }}</h5>
+                                        <p class="card-text">
+                                            Descripcion: {{ pro.descripcion }} <br>
+                                            Categoria: {{ pro.categoria }} <br>
+                                            Codigo: {{ pro.idProducto }} <br>
+                                            Precio: ${{ pro.precio }} <br>
+                                            Stock: {{ pro.stock}} <br>
+                                        </p>
+                                        <a href="{% url 'agregar' pro.idProducto %}" class="btn btn-success">Agregar al carrito</a>
+                                    </div>
+                                {% else %}
+                                    <div class="card-body">
+                                        <h5 class="card-title" style="font-weight: bold;">{{ pro.nombre }}</h5>
+                                        <p class="card-text">
+                                            Descripcion: {{ pro.descripcion }} <br>
+                                            Categoria: {{ pro.categoria }} <br>
+                                            Codigo: {{ pro.idProducto }} <br>
+                                            Precio: ${{ pro.precio }} <br>
+                                        </p>
+                                        <a href="#" class="btn btn-warning" style="color: black;">Producto agotado</a>
+                                    </div>
+                                {% endif %}
                             </div>
                         </div>
                         {% endfor %}

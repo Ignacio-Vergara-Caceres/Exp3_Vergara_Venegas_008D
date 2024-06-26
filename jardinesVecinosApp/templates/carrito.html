@@ -16,9 +16,9 @@
                         <td style="font-size: 13px;">{{ pro.nombre}}</td>
                         <td style="font-size: 13px;">{{ pro.precio}}</td>
                         <td style="font-size: 13px;">{{ pro.cantidad}}
-                            <br>
-                            <a href="{% url 'agregar' key %}" class="badge btn btn-primary">+</a>
-                            <a href="{% url 'restar' key %}" class="badge btn btn-primary">-</a>
+                        <br>
+                        <a href="{% url 'agregar' key %}" class="badge btn btn-primary">+</a>
+                        <a href="{% url 'restar' key %}" class="badge btn btn-primary">-</a>
                         </td>    
                     </tr>
                     <tr>
@@ -40,9 +40,15 @@
     <div class="col 6">
         <a href="{% url 'limpiar' %}" class="btn btn-warning" style="color: black;">Limpiar</a>
     </div>
-    <div class="col 6">
-        <a href="{% url 'generarBoleta' %}" class="btn btn-primary" style="color: black;">Comprar</a>
-    </div>
+    {% if user.is_authenticated %}
+        <div class="col 6">
+            <a href="{% url 'generarBoleta' %}" class="btn btn-primary" style="color: black;">Comprar</a>
+        </div>
+    {% else %}
+        <div class="col 6">
+            <a href="#" class="btn btn-secondary" style="color: black;">Debe estar logeado para comprar</a>
+        </div>
+    {% endif%}
 </div>
 
 {% endblock contenido %}

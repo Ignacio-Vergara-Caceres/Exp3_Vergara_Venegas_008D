@@ -5,6 +5,8 @@ from .models import Categoria, Producto, Boleta, detalle_boleta
 from .forms import ProductoForm, RegistroUserForm, ActualizarPerfilForm
 from django.contrib.auth.models import User
 from jardinesVecinosApp.compras import Carrito
+from django.contrib import messages
+
 
 # Create your views here.
 def inicio(request):
@@ -41,16 +43,33 @@ def detalle_producto(request, id):
     return render (request, 'detalleProducto.html', {'producto':producto})
 
 def modificar(request, id):
-    producto = Producto.objects.get(idProducto=id)
-    datos={
-        'forModificar': ProductoForm(instance=producto),     #crea un obj de tipo formulario
-        'producto':  producto
-    }
-    if request.method=='POST':
-        formulario= ProductoForm(request.POST, request.FILES, instance=producto)
+    producto = get_object_or_404(Producto, idProducto=id)
+    original_id = producto.idProducto
+
+    if request.method == 'POST':
+        formulario = ProductoForm(request.POST, request.FILES, instance=producto)
         if formulario.is_valid():
-            formulario.save()               #actualiza la información del obj.
+            nuevo_producto = formulario.save(commit=False)
+            nuevo_id = formulario.cleaned_data['idProducto']  # Obtener el nuevo ID desde formulario
+
+            if nuevo_id != original_id:
+                # Guardar el nuevo producto con el nuevo ID
+                nuevo_producto.idProducto = nuevo_id
+                nuevo_producto.save()
+
+                # Eliminar el producto original después de guardar el nuevo producto
+                Producto.objects.filter(idProducto=original_id).delete()
+            else:
+                # Si no hay cambio en la llave primaria, simplemente se guarda
+                nuevo_producto.save()
+
             return redirect('productos')
+
+    datos = {
+        'forModificar': ProductoForm(instance=producto),
+        'producto': producto
+    }
+
     return render(request, 'modificar.html', datos)
 
 
@@ -127,27 +146,58 @@ def tienda(request):
 
 
 def generarBoleta(request):
-    precio_total=0
-    for key, value in request.session['carrito'].items():
-        precio_total = precio_total + int(value['precio']) * int(value['cantidad'])
+    try:
+        precio_total = 0
+        carrito = request.session.get('carrito', {})
+        productos = []
 
-    boleta = Boleta(total = precio_total)
-    boleta.save()
+        # Verificar si el carrito está vacío
+        if not carrito:
+            raise ValueError("No se ha agregado nada al carrito")
 
-    productos = []
-    for key, value in request.session['carrito'].items():
-            producto = Producto.objects.get(idProducto=value['producto_id'])
+        # Validar el stock de todos los productos antes de procesar la boleta
+        for key, value in carrito.items():
+            producto = get_object_or_404(Producto, idProducto=value['producto_id'])
             cant = value['cantidad']
+
+            if cant > producto.stock:
+                raise ValueError(f"No hay suficiente stock para {producto.nombre}. Cantidad disponible: {producto.stock}")
+
             subtotal = cant * int(value['precio'])
-            detalle = detalle_boleta(idBoleta = boleta, id_producto = producto, cantidad = cant, subtotal = subtotal)
-            detalle.save()
+            precio_total += subtotal
+
+            # Crear el detalle de la boleta
+            detalle = detalle_boleta(idBoleta=None, id_producto=producto, cantidad=cant, subtotal=subtotal)
             productos.append(detalle)
-    datos={
-        'productos':productos,
-        'fecha':boleta.fechaCompra,
-        'total': boleta.total
-    }
-    request.session['boleta'] = boleta.idBoleta
-    carrito = Carrito(request)
-    carrito.limpiar()
-    return render(request, 'detallecarrito.html',datos)
+
+        # Guardar la boleta
+        boleta = Boleta(total=precio_total)
+        boleta.save()
+
+        # Guardar los detalles de la boleta
+        for detalle in productos:
+            detalle.idBoleta = boleta
+            detalle.save()
+
+            # Actualizar el stock del producto
+            producto = detalle.id_producto
+            producto.stock -= detalle.cantidad
+            producto.save()
+
+        # Limpiar el carrito después de completar la boleta
+        request.session['boleta'] = boleta.idBoleta
+        carrito.clear()
+
+        datos = {
+            'productos': productos,
+            'fecha': boleta.fechaCompra,
+            'total': boleta.total
+        }
+
+        return render(request, 'detallecarrito.html', datos)
+
+    except ValueError as e:
+        # Manejar el error de stock insuficiente con mensaje flash
+        error_message = str(e)
+        messages.error(request, error_message)
+        return redirect('tienda')  # Redirigir a la página principal de la tienda

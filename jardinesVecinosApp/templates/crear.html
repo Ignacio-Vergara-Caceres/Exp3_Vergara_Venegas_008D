@@ -31,6 +31,8 @@
             }
         }
     </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.js"></script>
 {% endblock head_estilos %}
 
 {% block contenido %}
@@ -40,8 +42,10 @@
             $("#formulario").validate({ 
                 rules:{
                     idProducto: "required",
+                    stock: "required",
                     nombre: "required",
                     descripcion: "required",
+                    precio: "required",
                     categoria: "required",
                     imagen: "required"
                 },
@@ -49,11 +53,17 @@
                     idProducto:{
                         required: 'Ingrese Id Producto',
                     },
+                    stock:{
+                        required: 'Ingrese cantidad de stock',
+                    },
                     nombre:{
                         required: 'Ingrese nombre',
                     },
                     descripcion:{
                         required: 'Ingrese descripcion',
+                    },
+                    precio:{
+                        required: 'Ingrese precio',
                     },
                     categoria:{
                         required: 'Seleccione categoria',
@@ -80,6 +90,11 @@
                 <div class="form-group">
                     {{ productoform.idProducto.label }}
                     {{ productoform.idProducto }}
+                </div>
+
+                <div class="form-group">
+                    {{ productoform.stock.label }}
+                    {{ productoform.stock }}
                 </div>
 
                 <div class="form-group">
@@ -112,9 +127,7 @@
 
         </main>
     {% endblock contenido %}
-    {% block script %}
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.js"></script>  
+    {% block script %}  
     {% endblock script %}
 
 </html>
